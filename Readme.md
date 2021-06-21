@@ -1,6 +1,7 @@
 # Yield Volatility Oracle
 
 This repository contains the [external adapter](https://docs.chain.link/docs/developers/) application code for Yield Volatility Oracle. 
+Reference to this project [here](https://www.notion.so/Yield-Volatility-Oracle-derivatives-base-on-volatility-1e2bbc14669a464b84f8a85706a0489c)
 
 ## Development and running
 The development environment is managed by docker-compose. The application code is mounted in a volume using docker compose meaning while running the application you're able edit the code while the application is running thanks to the use of uvicorn 
