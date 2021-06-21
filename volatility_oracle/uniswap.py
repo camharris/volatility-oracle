@@ -39,6 +39,7 @@ def get_pairs():
 def get_pair_day_data(pair_address, range):
     client = init_client()
 
+    daily_APYs = []
     current_time = calendar.timegm(time.gmtime())
 
     # Calculate epoch time of date deltas 
@@ -70,6 +71,7 @@ def get_pair_day_data(pair_address, range):
         dailyVolumeToken0
         dailyVolumeToken1
         dailyVolumeUSD
+        totalSupply
         reserveUSD
     }
     }
@@ -84,7 +86,17 @@ def get_pair_day_data(pair_address, range):
     client.close()
 
     # Calculate daily APY for each date
-    # for sets in result['pairDayDatas]:
-    
+    # [(daily volume * fee %) / total liquidity] * 365
+    for day in result['pairDayDatas']:
 
-    return result['pairDayDatas']
+        fee = 1 # Not sure how to get the fee yet
+        daily_APY = ((float(day['dailyVolumeUSD']) * fee) / float(day['totalSupply'])) * 365
+        daily_APYs.append(daily_APY)
+
+
+    # Get Average of list of the daily apy's for time period
+    average_apy = sum(daily_APYs) / len(daily_APYs)
+
+
+    # return result['pairDayDatas']
+    return average_apy
