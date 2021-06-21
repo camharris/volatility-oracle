@@ -32,3 +32,15 @@ def get_pairs():
     """
     pair_data = uniswap.get_pairs()
     return Response(jobRunID=1, data=pair_data)
+
+
+@app.post('/uniswap/getpairsdata', response_model=Response)
+def get_pairs(request: Request):
+    """
+    Return uniswap daily pair data for time period (10/50/100 days) 
+    """
+    # Raise error if data is missing address or range 
+    
+
+    pair_data = uniswap.get_pair_day_data(request.data['address'], request.data['range'])
+    return Response(jobRunID=1, data=pair_data)
