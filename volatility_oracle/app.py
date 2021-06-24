@@ -28,7 +28,11 @@ def health_check():
 @app.get('/uniswap/getpairs', response_model=Response)
 def get_pairs():
     """
-    Return a list of all the uniswap token pairs 
+    Return a list of all the uniswap token pairs. 
+    Parameters: data {
+        address,
+        range
+    }
     """
     pair_data = uniswap.get_pairs()
     return Response(jobRunID=1, data=pair_data)

@@ -85,18 +85,33 @@ def get_pair_day_data(pair_address, range):
 
     client.close()
 
-    # Calculate daily APY for each date
-    # [(daily volume * fee %) / total liquidity] * 365
-    for day in result['pairDayDatas']:
+    if len(result["pairDayDatas"]) > 1:
 
-        fee = 1 # Not sure how to get the fee yet
-        daily_APY = ((float(day['dailyVolumeUSD']) * fee) / float(day['totalSupply'])) * 365
-        daily_APYs.append(daily_APY)
+        # Calculate daily APY for each date
+        # [(daily volume * fee %) / total liquidity] * 365
+        for day in result['pairDayDatas']:
+            fee = 0.003 # Uniswap fee 0.3%
+
+            try:
+                daily_APY = ((float(day['dailyVolumeUSD']) * fee) // float(day['totalSupply'])) * 365
+                daily_APYs.append(daily_APY)
+            except:
+                # If the above division failed it's most likely a ZeroDivisionError
+                # due to daily volume and totalsupply being zero
+                return 0
 
 
-    # Get Average of list of the daily apy's for time period
-    average_apy = sum(daily_APYs) / len(daily_APYs)
+        # Get Average of list of the daily apy's for time period 
+        try:
+            average_apy = sum(daily_APYs) // len(daily_APYs)
+            return average_apy
+        except:
+            # If the above average fails it's because there is only one element in the list
+            return daily_APYs[0]
 
+    # Return zero if no historical data was found
+    return 0
 
-    # return result['pairDayDatas']
-    return average_apy
+    def calc_imperm_loss():
+
+        return True
