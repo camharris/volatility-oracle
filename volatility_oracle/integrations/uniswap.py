@@ -11,9 +11,18 @@ def init_client_v2():
     client = Client(transport=transport, fetch_schema_from_transport=True)
     return client
 
+
+
+def init_client_v3():
+    endpoint='https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
+    transport=RequestsHTTPTransport(url=endpoint)
+    client = Client(transport=transport, fetch_schema_from_transport=True)
+    return client
+
 # Get pairs
 def get_pairs_v2():
     client = init_client_v2()
+    # TODO sort on volume
     query = gql(
         """
         {
