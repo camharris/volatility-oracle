@@ -1,20 +1,19 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
-import json
 import calendar
 import time 
 
 
 # Initialize gql client
-def init_client():
+def init_client_v2():
     endpoint='https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2'
     transport=RequestsHTTPTransport(url=endpoint)
     client = Client(transport=transport, fetch_schema_from_transport=True)
     return client
 
 # Get pairs
-def get_pairs():
-    client = init_client()
+def get_pairs_v2():
+    client = init_client_v2()
     query = gql(
         """
         {
@@ -36,8 +35,8 @@ def get_pairs():
 
 
 # Get pairDayData
-def get_pair_day_data(pair_address, range):
-    client = init_client()
+def get_pair_day_data_v2(pair_address, range):
+    client = init_client_v2()
 
     daily_APYs = []
     current_time = calendar.timegm(time.gmtime())

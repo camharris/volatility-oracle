@@ -1,12 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Any, Optional
-import requests
 from starlette.responses import Response
 from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
-from volatility_oracle import uniswap
-from volatility_oracle import balancer
-import json
+import volatility_oracle.integrations.uniswap as uniswap
+import volatility_oracle.integrations.balancer as balancer
 
 app = FastAPI()
 
@@ -27,16 +25,16 @@ def health_check():
     return Response(jobRunID=1, data={True})
 
 
-@app.get('/uniswap/getpairs', response_model=Response)
+@app.get('/uniswap_v2/getpairs', response_model=Response)
 def get_pairs():
     """
     Return a list of all the uniswap token pairs. 
     """
-    pair_data = uniswap.get_pairs()
+    pair_data = uniswap.get_pairs_v2()
     return Response(jobRunID=1, data=pair_data)
 
 
-@app.post('/uniswap/getpairsdata', response_model=Response)
+@app.post('/uniswap_v2/getpairsdata', response_model=Response)
 def get_pairs(request: Request):
     """
     Return uniswap daily pair data for time period (10/50/100 days) 
@@ -53,7 +51,7 @@ def get_pairs(request: Request):
         )
 
 
-    pair_data = uniswap.get_pair_day_data(request.data['address'], request.data['range'])
+    pair_data = uniswap.get_pair_day_data_v2(request.data['address'], request.data['range'])
     return Response(jobRunID=1, data=pair_data)
 
 @app.get('/balancer_v1/getpools', response_model=Response)
