@@ -123,7 +123,3 @@ def get_pair_day_data_v2(pair_address, range):
 
     # Return zero if no historical data was found
     return 0
-
-    # def calc_imperm_loss():
-
-    #     return True
