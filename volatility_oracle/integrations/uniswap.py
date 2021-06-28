@@ -27,7 +27,7 @@ def get_pairs_v2():
     query = gql(
         """
         {
-            pairs {
+            pairs(first: 100, orderBy: txCount, orderDirection: desc) {
                 id,
                 token0 {
                 id
