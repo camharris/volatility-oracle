@@ -1,5 +1,6 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
+import pandas as pd
 import calendar
 import time 
 
@@ -96,30 +97,33 @@ def get_pair_day_data_v2(pair_address, range):
     if len(result["pairDayDatas"]) > 1:
 
         # Calculate daily APY for each date
-        # [(daily volume * fee %) / total liquidity] * 365
+        # [(daily volume USD * fee %) / total reserves USD] * 365
         for day in result['pairDayDatas']:
             fee = 0.003 # Uniswap fee 0.3%
 
             try:
-                daily_APY = ((float(day['dailyVolumeUSD']) * fee) // float(day['totalSupply'])) * 365
+                daily_APY = ((float(day['dailyVolumeUSD']) * fee) / float(day['reserveUSD'])) * 365
                 daily_APYs.append(daily_APY)
-            except:
+            except Exception as e:
                 # If the above division failed it's most likely a ZeroDivisionError
                 # due to daily volume and totalsupply being zero
+                print(e)
                 return 0
 
-
-        # Get Average of list of the daily apy's for time period 
+        # Get Standard Deviation of the daily apy's for time period 
         try:
-            average_apy = sum(daily_APYs) // len(daily_APYs)
-            return average_apy
-        except:
+            daily_APYs = pd.Series(daily_APYs)
+            apy_sd = daily_APYs.std()
+            print(apy_sd)
+            return apy_sd
+        except Exception as e:
             # If the above average fails it's because there is only one element in the list
+            print(e)
             return daily_APYs[0]
 
     # Return zero if no historical data was found
     return 0
 
-    def calc_imperm_loss():
+    # def calc_imperm_loss():
 
-        return True
+    #     return True
