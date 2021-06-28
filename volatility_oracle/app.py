@@ -25,7 +25,7 @@ def health_check():
     return Response(jobRunID=1, data={True})
 
 
-@app.get('/uniswap_v2/getpairs', response_model=Response)
+@app.get('/uniswap_v2/pairs', response_model=Response)
 def get_pairs():
     """
     Return a list of all the uniswap token pairs. 
@@ -34,7 +34,7 @@ def get_pairs():
     return Response(jobRunID=1, data=pair_data)
 
 
-@app.post('/uniswap_v2/getpairsdata', response_model=Response)
+@app.post('/uniswap_v2/pair_apy', response_model=Response)
 def get_pairs(request: Request):
     """
     Return uniswap daily pair data for time period (10/50/100 days) 
@@ -51,10 +51,10 @@ def get_pairs(request: Request):
         )
 
 
-    pair_data = uniswap.get_pair_day_data_v2(request.data['address'], request.data['range'])
+    pair_data = uniswap.get_pair_apy_v2(request.data['address'], request.data['range'])
     return Response(jobRunID=1, data=pair_data)
 
-@app.get('/balancer_v1/getpools', response_model=Response)
+@app.get('/balancer_v1/pools', response_model=Response)
 def get_pools_v1():
     """
     Return a list of the top pools by volume
@@ -62,7 +62,7 @@ def get_pools_v1():
     pools = balancer.get_top_pools_v1()
     return Response(jobRunID=1, data=pools)
 
-@app.get('/balancer_v2/getpools', response_model=Response)
+@app.get('/balancer_v2/pools', response_model=Response)
 def get_pools_v2():
     """
     Return a list of the top pools by volume
@@ -70,7 +70,7 @@ def get_pools_v2():
     pools = balancer.get_top_pools_v2()
     return Response(jobRunID=1, data=pools)
 
-@app.post('/balancer_v1/getpoolapy', response_model=Response)
+@app.post('/balancer_v1/pool_apy', response_model=Response)
 def get_balancer_apy_v1(request: Request):
     """
     Return balancer v1 pool apy 

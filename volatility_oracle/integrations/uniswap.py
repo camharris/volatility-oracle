@@ -26,14 +26,16 @@ def get_pairs_v2():
     query = gql(
         """
         {
-            pairs {
+            pairs(first: 100, orderBy: txCount, orderDirection: desc) {
                 id,
                 token0 {
                 id
                 },
                 token1 {
                 id
-                }
+                },
+                volumeUSD,
+                txCount
             }
         }
         """)
@@ -44,7 +46,7 @@ def get_pairs_v2():
 
 
 # Get pairDayData
-def get_pair_day_data_v2(pair_address, range):
+def get_pair_apy_v2(pair_address, range):
     client = init_client_v2()
 
     daily_APYs = []
@@ -119,6 +121,36 @@ def get_pair_day_data_v2(pair_address, range):
 
     # Return zero if no historical data was found
     return 0
+
+
+    def get_pair_data_v3(pool):
+        client = init_client_v3()
+
+        daily_APYs = []
+
+        query = gql(
+            """
+            query ($pool: Pool!, $enddate: Int!) {
+                poolDayDatas(first: 100, orderBy: date, orderDirection: asc,
+                where: {
+                    pool: $pool,
+                    date_gt: $enddate
+                }
+                ) {
+                    date,
+                    volumeToken0
+                    volumeToken1,
+                    volumeUSD,
+                    feesUSD,
+                    tvlUSD,
+
+                }
+            }
+            """
+        )
+
+        return True
+
 
     def calc_imperm_loss():
 

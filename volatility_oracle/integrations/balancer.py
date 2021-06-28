@@ -98,6 +98,7 @@ def get_pool_apy_v1(pool_address):
         }
         """
     )
+    
     params = {
         "pool_address": pool_address
     }
