@@ -156,6 +156,3 @@ def get_pair_apy_v2(pair_address, range):
         return True
 
 
-    def calc_imperm_loss():
-
-        return True

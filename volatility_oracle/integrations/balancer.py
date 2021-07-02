@@ -2,9 +2,7 @@ from fastapi import params
 from fastapi.params import Query
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
-import json
-import calendar 
-import time
+
 
 # Initialize gql client
 def init_client_v1():
