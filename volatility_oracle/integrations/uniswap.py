@@ -63,10 +63,10 @@ def get_pair_apy_v2(pair_address, range):
     try:
         range = int(range)
     except:
-        return "Invalid date range: {}".format(range)
+        return { "error": "Invalid date range: {}".format(range) }
 
     if range != 10 and range != 50 and range != 100:
-        return "Invalid date range: {}".format(range)
+        return { "error": "Invalid date range: {}".format(range) }
     elif range == 10:
         end_date = time_10_days
     elif range == 50:

@@ -2,8 +2,9 @@ from fastapi import FastAPI, HTTPException, Security
 from fastapi.security.api_key import APIKeyHeader
 from pydantic import BaseModel
 from typing import Any, Optional
+from starlette.applications import Starlette
 from starlette.responses import Response
-from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR, HTTP_403_FORBIDDEN
+from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR, HTTP_403_FORBIDDEN, HTTP_200_OK
 import volatility_oracle.integrations.uniswap as uniswap
 import volatility_oracle.integrations.balancer as balancer
 import os
@@ -29,6 +30,9 @@ class Request(BaseModel):
 class Response(BaseModel):
     jobRunID: str
     data: Any
+    result: Optional[Any]
+    statusCode: Optional[int]
+
 
 
 @app.get('/healthcheck', response_model=Response)
@@ -66,7 +70,13 @@ def get_pairs(request: Request):
 
 
     pair_data = uniswap.get_pair_apy_v2(request.data['address'], request.data['range'])
-    return Response(jobRunID=1, data=pair_data)
+    return Response(
+        jobRunID=request.id,
+        data=pair_data,
+        # if an error occurred and no apy_std is returned the result is 0
+        result= 0 if 'apy_std' not in pair_data else pair_data['apy_std'],
+        statusCode=200 if 'error' not in pair_data else 400
+    )
 
 @app.get('/balancer_v1/pools', response_model=Response, dependencies=[Security(get_api_key)])
 def get_pools_v1():
