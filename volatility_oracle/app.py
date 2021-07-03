@@ -23,11 +23,11 @@ def get_api_key(header: str = Security(X_API_KEY_HEADER)):
 
 
 class Request(BaseModel):
-    id: int
+    id: str
     data: Any
 
 class Response(BaseModel):
-    jobRunID: int
+    jobRunID: str
     data: Any
 
 
