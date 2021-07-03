@@ -6,7 +6,7 @@ Reference to this project [here](https://www.notion.so/Yield-Volatility-Oracle-d
 ## Development and running
 The development environment is managed by docker-compose. The application code is mounted in a volume using docker compose meaning while running the application you're able edit the code while the application is running thanks to the use of uvicorn 
 ```
-touch .env.local
+echo 'API_KEY=${DESIRED API KEY}' > .env.local
 docker-compose build  
 ~~
 docker-compose up 
