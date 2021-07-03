@@ -110,21 +110,21 @@ def get_pair_apy_v2(pair_address, range):
                 # If the above division failed it's most likely a ZeroDivisionError
                 # due to daily volume and totalsupply being zero
                 print(e)
-                return { "apy": 0}
+                return { "apy_std": 0}
 
         # Get Standard Deviation of the daily apy's for time period 
         try:
             daily_APYs = pd.Series(daily_APYs)
             apy_sd = daily_APYs.std()
             print(apy_sd)
-            return { "apy": apy_sd }
+            return { "apy_std": apy_sd }
         except Exception as e:
             # If the above average fails it's because there is only one element in the list
             print(e)
-            return { "apy": daily_APYs[0] }
+            return { "apy_std": daily_APYs[0] }
 
     # Return zero if no historical data was found
-    return { "apy": 0 }
+    return { "apy_std": 0 }
 
 
     def get_pair_data_v3(pool):

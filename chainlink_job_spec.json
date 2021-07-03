@@ -1,0 +1,25 @@
+{ 
+  "name": "POST get pool APY",
+  "initiators": [
+    {
+      "type": "RunLog",
+      "params": {
+        "address": "0x20cD09897ddc1682f14eb6E55C46223f615426d7"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "type": "uniswap_v2_apy"
+    },
+    {
+      "type": "copy"
+    },
+    {
+      "type": "ethuint256"
+    },
+    {
+      "type": "ethtx"
+    }
+  ]
+}
