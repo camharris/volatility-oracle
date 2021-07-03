@@ -58,6 +58,12 @@ def get_pair_apy_v2(pair_address, range):
     time_50_days  = current_time - 4320000 # 50 days in seconds
     time_100_days = current_time - 8640000 # 100 days in seconds 
 
+    # Using the chainlink client in solidity it's easier to send this as a string
+    # so force this to be an int
+    try:
+        range = int(range)
+    except:
+        return "Invalid date range: {}".format(range)
 
     if range != 10 and range != 50 and range != 100:
         return "Invalid date range: {}".format(range)
