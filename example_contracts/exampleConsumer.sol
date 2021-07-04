@@ -14,6 +14,10 @@ contract ExampleConsumer is ChainlinkClient, Ownable {
        uint256 indexed apyStd
     );
 
+    constructor() public Ownable() {
+      setPublicChainlinkToken();
+    }
+
     function RequestPoolApyStd(address _oracle, string _jobId, string _pool, string _range)
       public
       onlyOwner

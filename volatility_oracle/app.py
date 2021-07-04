@@ -57,19 +57,19 @@ def get_pairs(request: Request):
     """
     Return uniswap daily pair data for time period (10/50/100 days) 
     Parameters: data {
-        address,
+        pool,
         range
     }
     """
-    # Raise error if data is missing address or range 
-    if 'address' not in request.data or 'range' not in request.data:
+    # Raise error if data is missing pool or range 
+    if 'pool' not in request.data or 'range' not in request.data:
         raise HTTPException(
             status_code=400,
-            detail="data must include 'address' and 'range'"
+            detail="data must include 'pool' and 'range'"
         )
 
 
-    pair_data = uniswap.get_pair_apy_v2(request.data['address'], request.data['range'])
+    pair_data = uniswap.get_pair_apy_v2(request.data['pool'], request.data['range'])
     return Response(
         jobRunID=request.id,
         data=pair_data,

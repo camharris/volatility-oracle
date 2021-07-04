@@ -98,7 +98,11 @@ def get_pair_apy_v2(pair_address, range):
         "enddate": end_date,
         }
 
-    result = client.execute(query, variable_values=params)
+    try:
+        result = client.execute(query, variable_values=params)
+    except:
+        return { "error": "failed to find pool with address: {}".format(pair_address) }
+
 
     client.close()
 

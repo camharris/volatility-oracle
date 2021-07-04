@@ -1,25 +1,32 @@
-{ 
-  "name": "POST get pool APY",
+
+{
   "initiators": [
     {
-      "type": "RunLog",
+      "type": "runlog",
       "params": {
-        "address": "0x20cD09897ddc1682f14eb6E55C46223f615426d7"
+        "address": "0x20cd09897ddc1682f14eb6e55c46223f615426d7"
       }
     }
   ],
   "tasks": [
     {
-      "type": "uniswap_v2_apy"
+      "type": "uniswap_v2_apy",
+      "confirmations": null,
+      "params": {
+      }
     },
     {
-      "type": "copy"
+      "type": "ethuint256",
+      "confirmations": null,
+      "params": {
+      }
     },
     {
-      "type": "ethuint256"
-    },
-    {
-      "type": "ethtx"
+      "type": "ethtx",
+      "confirmations": null,
+      "params": {
+      }
     }
-  ]
-}
+  ],
+  "startAt": null,
+  "endAt": null
