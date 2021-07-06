@@ -16,7 +16,7 @@
       }
     },
     {
-      "type": "ethuint256",
+      "type": "ethbytes32",
       "confirmations": null,
       "params": {
       }
@@ -30,3 +30,4 @@
   ],
   "startAt": null,
   "endAt": null
+}
