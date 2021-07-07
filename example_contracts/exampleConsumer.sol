@@ -7,29 +7,33 @@ contract ExampleConsumer is ChainlinkClient, Ownable {
     uint256 constant private ORACLE_PAYMENT = 1 * LINK;
 
     // Apy standard deviation
-    uint256 public ApyStd;
+    string public ApyStd;
     
     event RequestPoolApyStdFulfilled(
        bytes32 indexed requestId,
-       uint256 indexed apyStd
+       bytes32 indexed apyStd
     );
+
+    constructor() public Ownable() {
+      setPublicChainlinkToken();
+    }
 
     function RequestPoolApyStd(address _oracle, string _jobId, string _pool, string _range)
       public
       onlyOwner
     {
         Chainlink.Request memory req = buildChainlinkRequest(stringToBytes32(_jobId), this, this.fulfillPoolApyStd.selector);
-        req.add("address", _pool);
+        req.add("pool", _pool);
         req.add("range", _range);
         sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
     }
 
-    function fulfillPoolApyStd(bytes32 _requestId, uint256 _apyStd)
+    function fulfillPoolApyStd(bytes32 _requestId, bytes32 _apyStd)
       public
       recordChainlinkFulfillment(_requestId)
     {
       emit RequestPoolApyStdFulfilled(_requestId, _apyStd);
-      ApyStd = _apyStd;  
+      ApyStd = string(abi.encodePacked(_apyStd));  
     }
 
   function getChainlinkToken() public view returns (address) {

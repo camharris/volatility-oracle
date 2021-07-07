@@ -63,10 +63,10 @@ def get_pair_apy_v2(pair_address, range):
     try:
         range = int(range)
     except:
-        return "Invalid date range: {}".format(range)
+        return { "error": "Invalid date range: {}".format(range) }
 
     if range != 10 and range != 50 and range != 100:
-        return "Invalid date range: {}".format(range)
+        return { "error": "Invalid date range: {}".format(range) }
     elif range == 10:
         end_date = time_10_days
     elif range == 50:
@@ -98,7 +98,11 @@ def get_pair_apy_v2(pair_address, range):
         "enddate": end_date,
         }
 
-    result = client.execute(query, variable_values=params)
+    try:
+        result = client.execute(query, variable_values=params)
+    except:
+        return { "error": "failed to find pool with address: {}".format(pair_address) }
+
 
     client.close()
 
@@ -116,49 +120,22 @@ def get_pair_apy_v2(pair_address, range):
                 # If the above division failed it's most likely a ZeroDivisionError
                 # due to daily volume and totalsupply being zero
                 print(e)
-                return { "apy_std": 0}
+                return { "apy_std": 0, "result": 0 }
 
         # Get Standard Deviation of the daily apy's for time period 
         try:
             daily_APYs = pd.Series(daily_APYs)
             apy_sd = daily_APYs.std()
             print(apy_sd)
-            return { "apy_std": apy_sd }
+            return { "apy_std": apy_sd, "result": apy_sd }
         except Exception as e:
             # If the above average fails it's because there is only one element in the list
             print(e)
-            return { "apy_std": daily_APYs[0] }
+            return { "apy_std": daily_APYs[0], "result": daily_APYs[0] }
 
     # Return zero if no historical data was found
-    return { "apy_std": 0 }
+    return { "apy_std": 0, "result": 0 }
 
 
-    def get_pair_data_v3(pool):
-        client = init_client_v3()
-
-        daily_APYs = []
-
-        query = gql(
-            """
-            query ($pool: Pool!, $enddate: Int!) {
-                poolDayDatas(first: 100, orderBy: date, orderDirection: asc,
-                where: {
-                    pool: $pool,
-                    date_gt: $enddate
-                }
-                ) {
-                    date,
-                    volumeToken0
-                    volumeToken1,
-                    volumeUSD,
-                    feesUSD,
-                    tvlUSD,
-
-                }
-            }
-            """
-        )
-
-        return True
 
 
