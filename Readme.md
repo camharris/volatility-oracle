@@ -12,7 +12,7 @@ This project started as a submission to the [2021 Hack Money Hackathon](https://
 This external adapter can provide a volatility rating for short-term (10 days), mid-term (50 days), and long-term (100 days) of various yield farming pools.
 Currently the external adapter supports Uniswap V2 but we plan to expand upon this in the future.
 
-Our metrics for the uniswap v2 integration work by calculating the daily APY for the supplied days in the day range and then calculating the standard deviation of the daily apy vector.
+Our metrics for the uniswap v2 integration work by calculating the daily APY for the supplied days in the day range and then calculating the standard deviation of the daily apy vector. See a comprehensive historical analysis [here](https://vintrocode.github.io/historical-volatility/historical-volatility/notebooks/historical-volatility.html) for context around yield volatility.
 
 ## Job Usage
 The Uniswap v2 job takes two parameters the pool (address of the pool in question) and the day range (10, 50, 100).
