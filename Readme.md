@@ -6,7 +6,7 @@ Reference to this project [here](https://www.notion.so/Yield-Volatility-Oracle-d
 This project started as a submission to the [2021 Hack Money Hackathon](https://showcase.ethglobal.co/hackmoney2021/yield-volatility-oracle)
 
 This external adapter can provide a volatility rating for short-term (10 days), mid-term (50 days), and long-term (100 days) of various yield farming pools.
-Currently the external adapter supports Uniswap V2 but we plan to expand upon this in the future. Please see our [case study on Uniswap V2 historical volatility](https://vintrocode.github.io/historical-volatility/historical-volatility/notebooks/historical-volatility.html)
+Currently the external adapter supports Uniswap V2 but we plan to expand upon this in the future. Please see our case study on [Uniswap V2 historical volatility](https://vintrocode.github.io/historical-volatility/historical-volatility/notebooks/historical-volatility.html)
 
 Our metrics for the uniswap v2 integration work by calculating the daily APY for the supplied days in the day range and then calculating the standard deviation of the daily apy vector.
 
@@ -18,7 +18,7 @@ The Uniswap v2 job takes two parameters the pool (address of the pool in questio
     req.add("range", _range);
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
 ```
-For testing this job against a deployment you can use our [example consumer contract](https://gist.github.com/camharris/53546695bbfca3c7a86a0c56413f32c9). Also see video demo of consumer contract in use: ![Video demo](https://youtu.be/2rv1_u-gnDc)
+For testing this job against a deployment you can use our [example consumer contract](https://remix.ethereum.org/#version=soljson-v0.4.24+commit.e67f0147.js&optimize=true&runs=200&gist=). Also see video demo of consumer contract in use: [Video demo](https://www.youtube.com/watch?v=2rv1_u-gnDc)
 
 
 ## Deployment 
