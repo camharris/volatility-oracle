@@ -1,3 +1,4 @@
+# ![Logo](./images/volatility_oracle_logo.png)
 # Yield Volatility Oracle
 
 This repository contains the [external adapter](https://docs.chain.link/docs/developers/) application code for Yield Volatility Oracle. 
