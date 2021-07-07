@@ -23,7 +23,7 @@ For testing this job against a deployment you can use our [example consumer cont
 
 ## Deployment 
 In order to deploy this external adapter on a Chainlink node a bridge must be created within the node pointing to the URL of the running external adapter.
-![Bridge Screenshot](./images/bridge.png)
+<img src="./images/bridge.png" width="500"/>
 
 Once the bridge is created, a job can be created with [this job spec](./chainlink_job_spec.json), be sure to update the address to your own oracle contract address
 
