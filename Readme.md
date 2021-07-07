@@ -18,7 +18,7 @@ The Uniswap v2 job takes two parameters the pool (address of the pool in questio
     req.add("range", _range);
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
 ```
-For testing this job against a deployment you can use our [example consumer contract](https://remix.ethereum.org/#version=soljson-v0.4.24+commit.e67f0147.js&optimize=true&runs=200&gist=). Also see video demo of consumer contract in use: [Video demo](https://www.youtube.com/watch?v=2rv1_u-gnDc)
+For testing this job against a deployment you can use our [example consumer contract](https://remix.ethereum.org/#version=soljson-v0.4.24+commit.e67f0147.js&optimize=true&runs=200&gist=). Also see our [video demo](https://www.youtube.com/watch?v=2rv1_u-gnDc).
 
 
 ## Deployment 
