@@ -1,5 +1,5 @@
 <p align="center">
-<img width="30%" src="./images/volatility_oracle_logo.png" />
+<img src="./images/volatility_oracle_logo.png" />
 </p>
 
 # Yield Volatility Oracle
