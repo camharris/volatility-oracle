@@ -20,6 +20,10 @@ The Uniswap v2 job takes two parameters the pool (address of the pool in questio
 ```
 For testing this job against a deployment you can use our [example consumer contract](https://gist.github.com/camharris/53546695bbfca3c7a86a0c56413f32c9)
 
+## Addresses
+```
+Kovan: 0x20cD09897ddc1682f14eb6E55C46223f615426d7 
+```
 
 ## Deployment 
 In order to deploy this external adapter on a Chainlink node a bridge must be created within the node pointing to the URL of the running external adapter.
