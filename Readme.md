@@ -37,6 +37,9 @@ In order to deploy this external adapter on a Chainlink node a bridge must be cr
 
 Once the bridge is created, a job can be created with [this job spec](./chainlink_job_spec.json), be sure to update the address to your own oracle contract address
 
+### Chainlink Node deployment 
+For our Chainlink node deployment we used our [AWS CDK application](https://github.com/camharris/chainlink-infra-cdk) for easily deployments into AWS.
+
 ## Development and running
 The development environment is managed by docker-compose. The application code is mounted in a volume using docker compose meaning while running the application you're able edit the code while the application is running thanks to the use of uvicorn 
 ```
