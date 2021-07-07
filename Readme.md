@@ -1,4 +1,7 @@
-# ![Logo](./images/volatility_oracle_logo.png)
+<p align="center">
+<img width="50%" src="./images/volatility_oracle_logo.png" />
+</p>
+
 # Yield Volatility Oracle
 
 This repository contains the [external adapter](https://docs.chain.link/docs/developers/) application code for Yield Volatility Oracle. 
@@ -28,7 +31,9 @@ Kovan: 0x20cD09897ddc1682f14eb6E55C46223f615426d7
 
 ## Deployment 
 In order to deploy this external adapter on a Chainlink node a bridge must be created within the node pointing to the URL of the running external adapter.
-![Bridge Screenshot](./images/bridge.png)
+<p align="center">
+<img src="./images/bridge.png" width="70%">
+</p>
 
 Once the bridge is created, a job can be created with [this job spec](./chainlink_job_spec.json), be sure to update the address to your own oracle contract address
 
