@@ -78,35 +78,3 @@ def get_pairs(request: Request):
         statusCode=200 if 'error' not in pair_data else 400
     )
 
-@app.get('/balancer_v1/pools', response_model=Response, dependencies=[Security(get_api_key)])
-def get_pools_v1():
-    """
-    Return a list of the top pools by volume
-    """
-    pools = balancer.get_top_pools_v1()
-    return Response(jobRunID=1, data=pools)
-
-@app.get('/balancer_v2/pools', response_model=Response, dependencies=[Security(get_api_key)])
-def get_pools_v2():
-    """
-    Return a list of the top pools by volume
-    """
-    pools = balancer.get_top_pools_v2()
-    return Response(jobRunID=1, data=pools)
-
-@app.post('/balancer_v1/pool_apy', response_model=Response, dependencies=[Security(get_api_key)])
-def get_balancer_apy_v1(request: Request):
-    """
-    Return balancer v1 pool apy 
-    Parameters: data {
-        address
-    }
-    """
-    if 'address' not in request.data:
-        raise HTTPException(
-            status_code=400,
-            detail="data must include 'address'"
-        )
-
-    data = balancer.get_pool_apy_v1(request.data['address'])
-    return Response(jobRunID=1, data=data)

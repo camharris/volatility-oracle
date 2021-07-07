@@ -137,32 +137,5 @@ def get_pair_apy_v2(pair_address, range):
     return { "apy_std": 0, "result": 0 }
 
 
-    def get_pair_data_v3(pool):
-        client = init_client_v3()
-
-        daily_APYs = []
-
-        query = gql(
-            """
-            query ($pool: Pool!, $enddate: Int!) {
-                poolDayDatas(first: 100, orderBy: date, orderDirection: asc,
-                where: {
-                    pool: $pool,
-                    date_gt: $enddate
-                }
-                ) {
-                    date,
-                    volumeToken0
-                    volumeToken1,
-                    volumeUSD,
-                    feesUSD,
-                    tvlUSD,
-
-                }
-            }
-            """
-        )
-
-        return True
 
 
